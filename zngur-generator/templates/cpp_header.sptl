@@ -239,9 +239,10 @@ namespace {{ self.namespace }} {
 
     {% if td.ty.path.to_string() == format!("::{}::Bool", self.namespace) %}
       public:
-        operator bool() {
+        operator bool() const noexcept {
           return __zngur_data[0];
         }
+        operator int() = delete;
         Bool(bool b) {
           __zngur_data[0] = b;
         }
@@ -267,7 +268,11 @@ namespace {{ self.namespace }} {
 
     public:
       {% if is_copy %}
+        {% if td.ty.path.to_string() == format!("::{}::Bool", self.namespace) %}
+        {{ name }}() { __zngur_data[0] = 0; }
+        {% else %}
         {{ name }}() { {{ alloc_heap }} }
+        {% endif %}
         ~{{ name }}() { {{ free_heap }} }
         {{ name }}(const {{ name }}& other) {
           {{ alloc_heap }}
