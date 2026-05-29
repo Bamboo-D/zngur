@@ -249,6 +249,24 @@ namespace {{ self.namespace }} {
         friend ::std::ostream& operator<<(::std::ostream& os, const Bool& b) {
           return os << static_cast<bool>(b);
         }
+        friend bool operator==(const Bool& a, const Bool& b) {
+          return static_cast<bool>(a) == static_cast<bool>(b);
+        }
+        friend bool operator==(const Bool& a, bool b) {
+          return static_cast<bool>(a) == b;
+        }
+        friend bool operator==(bool a, const Bool& b) {
+          return a == static_cast<bool>(b);
+        }
+        friend bool operator!=(const Bool& a, const Bool& b) {
+          return static_cast<bool>(a) != static_cast<bool>(b);
+        }
+        friend bool operator!=(const Bool& a, bool b) {
+          return static_cast<bool>(a) != b;
+        }
+        friend bool operator!=(bool a, const Bool& b) {
+          return a != static_cast<bool>(b);
+        }
     {% endif %}
 
     {% if td.ty.path.to_string() == format!("::{}::Char", self.namespace) %}
