@@ -242,7 +242,7 @@ namespace {{ self.namespace }} {
         operator bool() const noexcept {
           return __zngur_data[0];
         }
-        operator int() = delete;
+        operator int() const = delete;
         Bool(bool b) {
           __zngur_data[0] = b;
         }
