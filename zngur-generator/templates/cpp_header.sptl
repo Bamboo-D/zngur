@@ -246,6 +246,9 @@ namespace {{ self.namespace }} {
         Bool(bool b) {
           __zngur_data[0] = b;
         }
+        friend ::std::ostream& operator<<(::std::ostream& os, const Bool& b) {
+          return os << static_cast<bool>(b);
+        }
     {% endif %}
 
     {% if td.ty.path.to_string() == format!("::{}::Char", self.namespace) %}
